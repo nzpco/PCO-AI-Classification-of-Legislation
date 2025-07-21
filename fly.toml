@@ -1,0 +1,31 @@
+# fly.toml app configuration file generated for pco-ui on 2025-05-09T11:10:28+12:00
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'pco-ui'
+primary_region = 'syd'
+
+[build]
+
+
+[http_service]
+internal_port = 8501
+force_https = true
+auto_stop_machines = 'stop'
+auto_start_machines = true
+min_machines_running = 0
+processes = ['app']
+
+[[vm]]
+memory = '2gb'
+cpu_kind = 'shared'
+cpus = 2
+
+[mounts]
+source = "pco_data"
+destination = "/data"
+
+[env]
+AUTH_PATH = "/data/auth"
+LANCE_PATH = "/data/lance"
+KUZU_PATH = "/data/kuzu"

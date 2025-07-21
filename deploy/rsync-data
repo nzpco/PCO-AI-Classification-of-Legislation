@@ -1,0 +1,43 @@
+#!/bin/bash
+set -euo pipefail
+
+usage() {
+  echo "Usage: $0 <source_dir> <target_dir>"
+  exit 1
+}
+
+if [ $# -ne 2 ]; then
+  usage
+fi
+
+SRC=$1
+DEST=$2
+
+# 1) Gather all machine IDs for this app
+MACHINES=$(fly machine list --json | jq -r '.[].id')
+if [ -z "$MACHINES" ]; then
+  echo "❌ No machines found for this app"
+  exit 1
+fi
+
+# 2) Start each machine (idempotent if already running)
+echo "🔄 Starting machines..."
+for M in $MACHINES; do
+  echo "⏳ Starting $M"
+  fly machine start "$M"
+done
+
+# 3) Give them a moment to come online
+sleep 5
+
+# 4) Upload via rsync + fly-ssh wrapper
+echo "📡 Uploading to all machines..."
+for M in $MACHINES; do
+  echo "➡️  $M"
+  rsync -rltzPi --delete \
+    -e ./deploy/fly-rsync-helper \
+    "${SRC%/}/" \
+    "${M}:${DEST%/}/"
+done
+
+echo "✅ Upload complete for all machines."

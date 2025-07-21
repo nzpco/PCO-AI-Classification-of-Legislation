@@ -1,0 +1,11 @@
+#!/bin/bash
+# Pass this to rysnc as the -e option to use fly ssh.
+# You need to pass the machine id as server first argument.
+# example:
+#   rsync -rltzPi --delete -e ./scripts/fly-rsync-helper ./data/ MACHINE_ID:/data/
+
+set -euo pipefail
+MACHINE="$1"
+shift
+CMD=$(printf " %q" "$@")
+fly ssh console --quiet --machine "$MACHINE" -C "$CMD"

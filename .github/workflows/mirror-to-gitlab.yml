@@ -1,0 +1,26 @@
+name: Mirror to PCO GitLab
+
+on:
+  push:
+    branches:
+      - pco-gitlab
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout GitHub repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # fetch full history for gitlab. Else it fails.
+
+      - name: Push to GitLab
+        env:
+          GITLAB_URL: https://gitlab.com/your-namespace/your-repo.git
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/pco-ai-legislation-classification/dragonfly-pco-ui.git
+          git push --force gitlab HEAD:main  # adjust target branch as needed

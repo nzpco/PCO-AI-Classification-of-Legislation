@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+body * {
+    font-family: "IBM Plex Sans", sans-serif !important;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  /* font-variation-settings: */
+  /*   "wdth" 100; */
+}
+
+.block-container {
+    padding-top: 1rem;
+    padding-bottom: 0rem;
+    margin-top: 0rem;
+}
+
+.request {
+    background-color: #f8c0f4;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.legal_ref {
+    margin-top: 1rem;
+    background-color: hsl(120, 80%, 90%);
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+:target {
+  background-color: yellow;
+  transition: background-color 0.5s ease;
+  border-radius: 0.5rem;
+}
+
+.stApp header {
+    display: none;
+}
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+
+/* Reduce heading sizes */
+h1 {font-size: 1.8rem !important;}
+h2 {font-size: 1.5rem !important;}
+h3 {font-size: 1.3rem !important;}
+h4 {font-size: 1.1rem !important;}
+h5 {font-size: 1rem !important;}
+h6 {font-size: 1rem !important;}
+
+/* Compress sidebar text with tighter line spacing */
+[data-testid="stSidebar"] .stMarkdown p {
+    margin-bottom: 0.5rem !important;
+}
+

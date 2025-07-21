@@ -1,0 +1,50 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Editor and OS files
+*.swp
+*.swo
+*.DS_Store
+*.idea/
+.vscode/
+
+# Git
+.git/
+.gitignore
+
+# Testing / logs / output
+*.log
+coverage/
+htmlcov/
+.pytest_cache/
+*.sqlite3
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# direnv
+.envrc
+
+# Secrets
+.env
+.env.*
+_env
+*.pem
+*.key
+
+# local config
+fly.toml
+justfile
+
